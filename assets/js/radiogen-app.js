@@ -53,17 +53,17 @@ class RadioGenApp extends GlobalRouting {
         this.liveContainer      = document.querySelector("[--live-container]");
 
 
-        this._initHeaderTabs();
+        // this._initHeaderTabs();
         
-        this._addClickEvent([
-            this._homeHeaderTab,
-            this._podcastHeaderTab,
-            this._programsHeaderTab,
-            this._aboutUsHeaderTab
-        ], this.toggleHeaderTab.bind(this));
+        // this._addClickEvent([
+        //     this._homeHeaderTab,
+        //     this._podcastHeaderTab,
+        //     this._programsHeaderTab,
+        //     this._aboutUsHeaderTab
+        // ], this.toggleHeaderTab.bind(this));
 
-        this._mobileHeader = MobileMenu.create(".mobile-menu-drawer-overlay", this);
-        this._radioBar     = RadioBar.create("[--radio-bar-overlay]");
+        this._mobileHeader  = MobileMenu.create(".mobile-menu-drawer-overlay", this);
+        this._radioBar      = {}; //RadioBar.create("[--radio-bar-overlay]");
         
         this.facebookIcons  = document.querySelectorAll('[--key="facebook-icon"]');
         this.instagramIcons = document.querySelectorAll('[--key="instagram-icon"]');
@@ -77,7 +77,6 @@ class RadioGenApp extends GlobalRouting {
         });
         
         this.imageSlider = document.querySelector('.image-slider');
-        
     }
     
     onPageSwitch(page, event) {

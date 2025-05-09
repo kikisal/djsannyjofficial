@@ -66,15 +66,18 @@
 
 .hls-live-streaming video#video-live {
     object-fit: contain;
-    background: #000000;
+    background: #000;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 32px rgb(0 0 0 / 15%);
 }
 
 .live-video-container {
-    background: #000;
-    display: flex;
+    background: #e5e4ed;
+    /* display: flex; */
     justify-content: center;
+    padding-bottom: 70px;
 }
 
 .tv-title-status {
@@ -85,7 +88,14 @@
 
 .live-video-container .video-element {
     position: relative;
-    height: calc(100vh - 192px);
+    /* height: 100%; */
+    --height: 100%;
+    --ratio: calc(16 / 9);
+    --width: 80vw;
+    height: calc(1 / var(--ratio) * var(--width));
+    width: var(--width);
+    margin:0 auto;
+    background: inherit;
     display: flex;
 }
 
@@ -106,7 +116,7 @@
 }
 
 .hls-live-container {
-    margin-top: 11px;
+    margin-top: 0;
 }
 
 .hls-live-container.offline .live-status-ball {

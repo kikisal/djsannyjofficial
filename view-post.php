@@ -66,11 +66,11 @@ if ($db->connect()) {
     }
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="it">
 <?php require_once __DIR__ . "/components/head.php"; ?>
-
 <body opacity-animation class="state-disappear" use-img-animation>
     <div class="rg-overlay" id="rg-sharePopup">
       <div class="rg-popup">
@@ -88,38 +88,36 @@ if ($db->connect()) {
     
     <?php require_once __DIR__ . "/components/mobile-header.php"; ?>
     <?php require_once __DIR__ . "/components/header.php"; ?>
-    <div class="content-wrapper content-shadow">
-    <div class="slider-wrapper">
-            <div class="content-wrapper"></div>
-            <div class="image-slider" --image-slider-widget>
-                <div class="image-slider-container">
-                    <div class="image-slider-controller">
-                        <div class="image-slider-align" --slider-items>
-                            <?php
-                            foreach ($bannerImages as $image) {
-                                
-                                $resUrl = $image;
-                                $tokens = explode(".", $resUrl);
-                                $format = @$tokens[count($tokens) - 1];
 
-                                if (in_array($format, $videoFormats)) {
-                                    echo  "<div class=\"image-slider-item\"><video class=\"video-banner-viewer\" src=\"" . $image . "\" loop muted controls=\"false\" autoplay=\"true\" width=\"640\" height=\"360\"></video></div>";
-                                } else {
-                                    echo "<div class=\"image-slider-item\"><img src=\"" . $image . "\" alt=\"\"/></div>";
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
+    <div class="image-slider" --image-slider-widget style="display: none">
+        <div class="image-slider-container">
+            <div class="image-slider-controller">
+                <div class="image-slider-align" --slider-items>
+                    <?php
+                    foreach ($bannerImages as $image) {
+                        
+                        $resUrl = $image;
+                        $tokens = explode(".", $resUrl);
+                        $format = @$tokens[count($tokens) - 1];
+
+                        if (in_array($format, $videoFormats)) {
+                            echo  "<div class=\"image-slider-item\"><video class=\"video-banner-viewer\" src=\"" . $image . "\" loop muted controls=\"false\" autoplay=\"true\" width=\"640\" height=\"360\"></video></div>";
+                        } else {
+                            echo "<div class=\"image-slider-item\"><img src=\"" . $image . "\" alt=\"\"/></div>";
+                        }
+                    }
+                    ?>
                 </div>
-            </div>    
+            </div>
         </div>
+    </div>
+    
+    <div class="content-wrapper content-shadow" style="background-color: #e5e4ed">
         
-        <div class="hls-live-container offline" --live-container>
-            <h1 class="section-title gray-bg text-center" style="color: #000;">La nostra TV</h1>
+        <div class="hls-live-container offline" --live-container>                         
             <div class="hls-live-streaming">
                 
-                <div class="tv-title-status" style="display: none">
+                <div class="tv-title-status">
                     <div class="hls-live-title-container">
                         <div class="hls-live-title">
                             <div class="live-status-ball"></div>
@@ -167,6 +165,8 @@ if ($db->connect()) {
                     </div>
                     
                 </div>
+                
+
             </div>
         </div>
         <div class="main-content">
@@ -175,7 +175,7 @@ if ($db->connect()) {
             </div>
 
             <div class="container-box">
-                <section class="news-section">
+                <section class="news-section" style="padding-top: 80px">
                     <feeder-view></feeder-view>
                 </section>
                 <!--

@@ -46,4 +46,16 @@ function _or($a, $b) {
     return $a != null ? $a : $b;
 }
 
+function stripURLQuery($uri) {
+    return explode("?", $uri)[0];
+}
+
+function routeName() {
+    global $uri, $routes;
+    return isset($routes[$uri]) ? $routes[$uri]["name"] : "Senza titolo";
+}
+
 $radioLink = _or(fetchRadioLink(), RADIO_STREAM_URL);
+
+$routes    = require_once $_SERVER['DOCUMENT_ROOT'] . '/routes.php';
+$uri       = stripURLQuery($_SERVER['REQUEST_URI']);

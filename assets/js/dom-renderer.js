@@ -649,6 +649,10 @@
         }
     }
 
+    GlobalRouting.prototype.redirectTo = function(uri) {
+        window.location.href = window.location.origin + `${uri}`;
+    }
+
     class PageSwitcher extends Module {
         constructor(domElement, clearHtml) {
             super('PageSwitcher');

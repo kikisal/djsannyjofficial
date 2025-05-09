@@ -177,7 +177,7 @@
                 return;
 
             router.redirectTo(`/view-post?id=${this.getPostData().id}&type=${this.getPostData().type}`);
-            window.scrollTo(0, 200);
+            // window.scrollTo(0, 200);
         }
 
         getPlayComponent() {

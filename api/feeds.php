@@ -15,6 +15,7 @@ if (!isset($_SESSION['feed_timestamp']))
 $type          = typeval(@$_GET['t']);
 $chunk         = intval(@$_GET['chunk']);
 
+
 $feedTimestamp = $_SESSION['feed_timestamp'];
 
 
