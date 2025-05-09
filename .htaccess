@@ -1,0 +1,27 @@
+RewriteEngine On
+
+# For any /api/* links, rewrite to /api/whateverpage.php
+RewriteCond %{DOCUMENT_ROOT}/api/$1.php -f
+RewriteRule ^api/(.*)$ /api/$1.php [L]
+
+# For all other links except for existing files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_URI} !^/live$
+
+RewriteRule ^([^\.]+)$ index.php/$1.php [L]
+RewriteRule ^live$ live.php [L]
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+    
+</IfModule>
+
+RewriteRule ^api/video-live/(.*)$ api/video-live.php [L,QSA]
+
+<Limit OPTIONS>
+    Order allow,deny
+    Allow from all
+</Limit>
