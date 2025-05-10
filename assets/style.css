@@ -272,7 +272,7 @@ h1, h2, h3, h4 {
     background-image: url(./djsannyj/logo.png);
     height: 65px;
     width: 126px;
-    background-size: 80%;
+    background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
     /* background-color: #000; */
@@ -961,8 +961,8 @@ h1 {
 }
 
 .live-recording {
-    width:  16px;
-    height: 16px;
+    width:  22px;
+    height: 22px;
     background-color: #f52525;
     border-radius: 50%;
 }
@@ -1674,11 +1674,6 @@ div[--content] > :last-child {
         padding: 8px 0;
     }
 
-    .slogan-image {
-        height: 50px;
-        width: 220px;
-    }
-
     .header-wrapper {
         justify-content: left;
     }
@@ -1744,6 +1739,7 @@ div[--content] > :last-child {
         margin: 0 auto;
         margin-bottom: 300px;
         border-radius: 0;
+        margin-top: 56px;
     }
 
     .news-section {
@@ -1909,7 +1905,7 @@ div[--content] > :last-child {
     }
 
     .slogan-image {
-        height: 34px;
+        height: 40px;
         width: 82px;
         background-size: contain;
         margin-left: 8px;

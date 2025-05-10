@@ -114,9 +114,28 @@ if ($db->connect()) {
                 </div>
             </div>    
         </div>
-        
+        <style>
+            .sanny-tv-image {
+                width: 500px;
+                background: none;
+            }
+
+            @media screen and (max-width: 800px) {
+                .sanny-tv-image {                    
+                    width: 85vw;
+                    margin-bottom: 9px;
+                    margin-top: 22px;
+                }
+            }
+        </style>
         <div class="hls-live-container offline" --live-container>
-            <h1 class="section-title gray-bg text-center" style="color: #000;">La nostra TV</h1>
+            <h1 class="section-title gray-bg text-center" style="
+            color: #000;
+            display: flex;
+            color: #000;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;"><img class="sanny-tv-image" src="<?= SITE_URL . "/assets/djsannyj/tv-label-nostar.png" ?>"/><div class="live-recording live"></div></h1>
             <div class="hls-live-streaming">
                 
                 <div class="tv-title-status" style="display: none">

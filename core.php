@@ -3,8 +3,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
 function cv() {
+    global $cacheCounter;
     if (DISABLE_GLOBAL_CACHE)
-        return 0;
+        return $cacheCounter;
     return time();
 }
 

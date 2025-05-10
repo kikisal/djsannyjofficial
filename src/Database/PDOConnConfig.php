@@ -48,26 +48,26 @@ namespace Database {
             return $this;
         }
 
-        public function user($user): static {
+        public function user($user) {
             $this->_user = $user;
             return $this;
         }
 
-        public function pass($pass): static {
+        public function pass($pass) {
             $this->_pass = $pass;
             return $this;
         }
 
-        public function db($db): static {
+        public function db($db) {
             $this->_db = $db;
             return $this;
         }
 
-        public function charset($cs): static {
+        public function charset($cs) {
             $this->_charset = $cs;
             return $this;
         }
-        public function options($opts): static {
+        public function options($opts) {
             $this->_options = $opts;
             return $this;
         }

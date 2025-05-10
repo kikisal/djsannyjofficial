@@ -24,3 +24,5 @@ define('DB_DATABASE', 'radiogeneration');
 define('DB_USER', 'root');
 define('DB_PASS', 'cicici');
 define('DB_CHARSET', 'utf8mb4');
+
+$cacheCounter = 0;
