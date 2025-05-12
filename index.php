@@ -1,24 +1,5 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/autoload.php';
-
-
-use Database\PDOConnConfig as PDOConfig;
-use Database\MySQLPDODatabase as MysqlDatabase;
-
-$db = new MysqlDatabase(
-    PDOConfig::create()
-    ->host(DB_HOST)
-    ->db(DB_DATABASE)
-    ->user(DB_USER)
-    ->pass(DB_PASS)
-    ->charset(DB_CHARSET)
-    ->options([
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ])
-);
 
 $videoFormats = [
     "mp4",
@@ -72,6 +53,7 @@ if ($db->connect()) {
 <?php require_once __DIR__ . "/components/head.php"; ?>
 
 <body opacity-animation class="state-disappear" use-img-animation>
+    
     <div class="rg-overlay" id="rg-sharePopup">
       <div class="rg-popup">
         <h2>Condividi il link</h2>
@@ -135,7 +117,7 @@ if ($db->connect()) {
             color: #000;
             justify-content: center;
             align-items: center;
-            gap: 16px;"><img class="sanny-tv-image" src="<?= SITE_URL . "/assets/djsannyj/tv-label-nostar.png" ?>"/><div class="live-recording live"></div></h1>
+            gap: 16px;"><img class="sanny-tv-image" src="<?= SITE_URL; ?>/assets/djsannyj/tv-label-nostar2.png?v=6"/><div class="live-recording live"></div></h1>
             <div class="hls-live-streaming">
                 
                 <div class="tv-title-status" style="display: none">
@@ -205,27 +187,7 @@ if ($db->connect()) {
             </div>
         </div>
         <div class="flex-grow"></div>
-        <div class="footer">
-            <!--
-            <div class="footer-big-section">
-                <div class="footer-wrapper flex f-row space-between align-center">
-                    <div class="footer-logo"><h2>Radio Generation</h2></div>
-                    <div>
-                        <div class="nav-item-list flex f-row space-even">
-                            <div class="nav-item"><a href="/about-us">Chi siamo</a></div>
-                            <div class="nav-item"><a href="/contacts">Contatti</></div>
-                            <div class="nav-item"><a href="privacy-policy">Privacy Policy</a></div>                            
-                        </div>
-                    </div>
-                    <div>A</div>    
-                </div>
-            </div>
-            -->
-            <!--<div class="brand-section">
-                <span>&copy; www.radiogeneration.it, <span class="t-bold">tutti i diritti riservati</span></span>
-            </div>
-            -->
-        </div>
+        <?php require_once __DIR__ . "/components/footer.php"; ?>
     </div>
     <style>
         .copyright-section {
@@ -319,7 +281,6 @@ if ($db->connect()) {
                 videoPlayBtn.classList.remove("l-playing");
             });
 
-
             window.onStreamStatusChange = () => {
 
                 if (!window.isStreamingEnabled)
@@ -356,11 +317,8 @@ if ($db->connect()) {
                 }
             };
 
-            (() => {
-            })();
-
+           
             const checkStreamingStatus = async () => {
-
                 try {
                     const response = await fetch("https://www.radiogeneration.it/api/stream-status");
                     const data     = await response.json();
@@ -377,7 +335,6 @@ if ($db->connect()) {
                 }
             };
             
-
             const app = new RadioGenApp();
 
             app.onPageSwitch("news-feeder", (state) => {

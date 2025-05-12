@@ -78,8 +78,9 @@
     <script defer src="<?= SITE_URL ?>/assets/js/image-slider.js?v=<?= cv(); ?>"></script>
      -->
     
-     
+    <?php if (!isset($noFancyStuff)) { ?>
     <script defer src="<?= SITE_URL ?>/assets/js/image-slider.js?v=<?= cv(); ?>"></script>
+	<?php } ?>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,6 +90,9 @@
     <link rel="preload" href="<?= SITE_URL; ?>/assets/icons/play-button.svg" as="image" />
     <link rel="preload" href="<?= SITE_URL; ?>/assets/icons/radio-loading-spinning.svg" as="image" />
     <link rel="preload" href="<?= SITE_URL; ?>/assets/pause-button.svg" as="image" />
+    
+    <link rel="stylesheet" href="assets/djsannyj/all.css"/>
+
     <style>
         .video-banner-viewer {
             width: 100%;

@@ -17,6 +17,11 @@ define('OPEN_FIREWALL_LINK', SITE_URL . '/api/openfirewall');
 
 define('CDN_ENDPOINT', 'http://radiogeneration.test/cdn/storage/');
 
+/* --- SOCIALS --- */
+define('FACEBOOK_LINK', 'https://www.facebook.com/santo.finocchiaro.djsannyj');
+define('INSTAGRAM_LINK', 'https://www.instagram.com/djsannyjofficial/');
+define('TIKTOK_LINK', 'https://www.tiktok.com/@djsannyjofficial');
+
 /* --- DATABASE --- */
 
 define('DB_HOST', 'localhost');
@@ -24,5 +29,7 @@ define('DB_DATABASE', 'radiogeneration');
 define('DB_USER', 'root');
 define('DB_PASS', 'cicici');
 define('DB_CHARSET', 'utf8mb4');
+
+
 
 $cacheCounter = 0;

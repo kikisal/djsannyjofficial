@@ -11,6 +11,13 @@ function goTo(link) {
     return a;
 }
 
+class DJSannyJApp extends GlobalRouting {
+    constructor() {
+        super({});
+        this._mobileHeader  = MobileMenu.create(".mobile-menu-drawer-overlay", this);
+    }
+};
+
 class RadioGenApp extends GlobalRouting {
     constructor() {
         super({});
@@ -68,13 +75,13 @@ class RadioGenApp extends GlobalRouting {
         this.facebookIcons  = document.querySelectorAll('[--key="facebook-icon"]');
         this.instagramIcons = document.querySelectorAll('[--key="instagram-icon"]');
         
-        this.facebookIcons.forEach(icon => {
-            icon.addEventListener('click',  () => goTo("https://www.facebook.com/share/fYZjFybeYRnJYUJF/"));
-        });
+        // this.facebookIcons.forEach(icon => {
+        //     icon.addEventListener('click',  () => goTo("https://www.facebook.com/share/fYZjFybeYRnJYUJF/"));
+        // });
         
-        this.instagramIcons.forEach(icon => {
-            icon.addEventListener('click', () => goTo("https://www.instagram.com/radiogenerationtv?igsh=aHJmMWp2OWs0c2lp"));
-        });
+        // this.instagramIcons.forEach(icon => {
+        //     icon.addEventListener('click', () => goTo("https://www.instagram.com/radiogenerationtv?igsh=aHJmMWp2OWs0c2lp"));
+        // });
         
         this.imageSlider = document.querySelector('.image-slider');
     }

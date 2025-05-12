@@ -60,3 +60,6 @@ $radioLink = _or(fetchRadioLink(), RADIO_STREAM_URL);
 
 $routes    = require_once $_SERVER['DOCUMENT_ROOT'] . '/routes.php';
 $uri       = stripURLQuery($_SERVER['REQUEST_URI']);
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/autoload.php';
+require_once __DIR__ . "/db-common.php";

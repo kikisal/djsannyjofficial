@@ -111,6 +111,10 @@ h1, h2, h3, h4 {
     flex-direction: row;
 }
 
+.col-dir {
+    flex-direction: column;
+}
+
 .align-center {
     align-items: center;
 }
@@ -269,14 +273,13 @@ h1, h2, h3, h4 {
 }
 
 .slogan-image {
-    background-image: url(./djsannyj/logo.png);
+    background-image: url("./djsannyj/logo.png?v=10");
     height: 65px;
     width: 126px;
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
     /* background-color: #000; */
-    filter: grayscale(1) invert(1);
     border-radius: 10px;
 }
 
@@ -330,7 +333,7 @@ nav .item.active a {
     font-weight: 600;
 }
 
-nav .item:hover a {
+nav .item:hover .hlink {
     color: var(--primary-color);
 }
 
@@ -363,7 +366,7 @@ nav .item:not(.active):hover {
 
 section.news-section {
     padding: 90px 93px 0 93px;
-    padding-bottom: 100px;
+    padding-bottom: 10px;
 }
 
 .news-list.small-news {
@@ -961,8 +964,10 @@ h1 {
 }
 
 .live-recording {
-    width:  22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+
     background-color: #f52525;
     border-radius: 50%;
 }
@@ -1095,8 +1100,16 @@ h1 {
 }
 
 .footer {
-    margin-bottom: 66px;
+    background: #000;
+    color: #fff;
+    padding: 90px 0px;
 }
+
+.copyright-text {
+    color: #ccc;
+    padding: 26px 0;
+}
+
 
 .about-us-container .story-section {
     margin-top: 33px;
@@ -1110,7 +1123,7 @@ h1 {
     left: calc(-1 * var(--drawer-width));
     top: 0;
     height: 100%;
-    background: #121212;
+    background: #f9f9f9;
     z-index: 999999999;
     user-select: none;
     transition: left 300ms ease-in-out;
@@ -1190,14 +1203,14 @@ h1 {
 .mobile-menu-drawer .small-text
 {
     font-size: 13px;
-    color: #747474;
+    color: #070707;
     font-weight: lighter;
 }
 
 .mobile-menu-drawer .hor-bar {
     margin: 12px 0;
     height: 1px;
-    background: #383838;
+    background: #dbdbdb;
 }
 
 /* Mobile Menu Drawer */
@@ -1215,7 +1228,8 @@ h1 {
 
 .mobile-menu-drawer .menu-items .menu-item.active {
     font-weight: 600;
-    background: #262626e8;
+    color: #29282e;
+    background: #e6e6e6e8;
 }
 
 .mobile-menu-drawer .menu-items .menu-item .menu-icon {
@@ -1225,7 +1239,7 @@ h1 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 90%;
-    filter: invert(1);
+    opacity: .85;
     
 }
 
@@ -1247,7 +1261,7 @@ h1 {
 }
 
 .mobile-menu-drawer .menu-items .menu-item {
-    color: #ffffff;
+    color: #000000;
     padding: 10px 16px;
     border-radius: 8px;
     font-size: 15px;
@@ -1257,19 +1271,19 @@ h1 {
 }
 
 .mobile-menu-drawer .menu-items .menu-item:hover:active {
-    background: #363636e8;
+    background: #cdcdcde8;
 }
 
 .mobile-menu-drawer .menu-items .menu-item:hover {
-    background: #262626e8;
+    background: #e0e0e0e8;
 }
 
 .mobile-menu-drawer .menu-items .menu-item.active:hover {
-    background: #363636e8;
+    background: #bdbdbde8;
 }
 
 .mobile-menu-drawer .menu-items .menu-item.active:active {
-    background: hsla(0, 0%, 31%, 0.91);
+    background: hsla(0, 0%, 69%, 0.91);
 }
 
 .mobile-menu-drawer .live-image-wrapper {
@@ -1277,12 +1291,13 @@ h1 {
 }
 
 .mobile-menu-drawer .live-image {
-    width: 80px;
-    height: 32px;
-    background: url('./live.png');
+    width: 90px;
+    height: 48px;
+    background: url(./djsannyj/logo.png);
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
+
 }
 
 .live-image-wrapper.live .live-circle {
@@ -1897,7 +1912,7 @@ div[--content] > :last-child {
     }
 
     .footer {
-        margin-bottom: 58px;
+        /* margin-bottom: 58px; */
     }
 
     .slogan.header-item {
@@ -2024,4 +2039,67 @@ div[--content] > :last-child {
 .post-image img {
     object-fit: contain;
     background-color: #060606;
+}
+
+.footer .headline {
+    padding: 0!important;
+    margin: 0!important;
+    color: #fff!important;
+    font-size: 3rem!important;
+}
+
+.gap-1 {
+    gap: .25rem;
+}
+
+.gap-2 {
+    gap: .5rem;
+}
+
+.gap-3 {
+    gap: .75rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.social-link {
+    --size: 40px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    font: normal normal normal 14px / 1 FontAwesome;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+.is-link {
+    color: #8b8b8b;
+    transition: color 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.is-link:hover {
+    color: #ffffff;
+}
+
+.social-link.facebook::before {
+    content: "\f09a";
+}
+
+.social-link.instagram::before {
+    content: "\f16d";
+}
+
+.social-link.tiktok {
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+}
+
+.social-link.tiktok::before {
+    content: "\e07b";
 }
