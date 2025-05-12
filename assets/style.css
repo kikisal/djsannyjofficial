@@ -3,6 +3,8 @@
     --primary-light: #e5e4ed;
     --primary-lighter: #e9e9ed;
     --primary-dark:  #28272b;
+    --primary-dark-2: #413f49;
+    --primary-gray: #828890;
 
     --primary-light-hued: #6c58e4;
     
@@ -456,6 +458,7 @@ h1 {
     text-wrap: nowrap;
 }
 
+
 .news-section h1, .section-title {
     text-align: left;
     font-size: 2.2rem;
@@ -497,6 +500,10 @@ h1 {
     display: flex;
     flex-direction: column;
     background-color: #fff;
+}
+
+.h-100 {
+    height: 100%;
 }
 
 .text-container {
@@ -2102,4 +2109,58 @@ div[--content] > :last-child {
 
 .social-link.tiktok::before {
     content: "\e07b";
+}
+
+.section-headline {
+    text-transform: capitalize;
+    font-size: 2.5rem;
+    padding: 0;
+    margin: 0;
+    line-height: 51px;
+    color: var(--primary-dark-2);
+}
+
+.content-padded {
+    padding: 0 93px;
+}
+
+
+.fixed-content {
+    width: 1324px;
+    margin: 0 auto 0 auto;
+    /* padding-bottom: 60px; */
+    font-size: 1em;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.site-dir {
+    padding: 6px 0;
+    font-size: 1.1rem;
+    color: var(--primary-gray);
+    font-weight: 400;
+    letter-spacing: .3px;
+}
+
+.site-dir a {
+    color: unset;
+    text-transform: unset;
+    font-weight: unset;
+}
+
+.site-dir a:hover {
+    text-decoration: underline;
+}
+
+.pd-81 {
+    padding-top: 81px;
+}
+
+.site-directory {
+    padding: 68px 0;
+}
+
+.product-browsing {
+    background-color: #fff;
 }
