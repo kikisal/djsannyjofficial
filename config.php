@@ -30,6 +30,12 @@ define('DB_USER', 'root');
 define('DB_PASS', 'cicici');
 define('DB_CHARSET', 'utf8mb4');
 
+define('PAGINATION_RANGE', 5);
+define("RELEASE_URI", "/release");
 
+/* -- OG META TAGS */
+define("OG_TITLE", "DJSannyJ");
+define("OG_IMAGE", "https://www.radiogeneration.it/assets/social-media-image.jpg");
+define("OG_DESC", "Sito ufficiale!");
 
 $cacheCounter = 0;

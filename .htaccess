@@ -1,5 +1,7 @@
 RewriteEngine On
 
+RewriteRule ^release/([0-9]+)$ /release.php?item=$1 [QSA,L]
+
 # For any /api/* links, rewrite to /api/whateverpage.php
 RewriteCond %{DOCUMENT_ROOT}/api/$1.php -f
 RewriteRule ^api/(.*)$ /api/$1.php [L]

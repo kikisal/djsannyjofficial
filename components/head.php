@@ -2,12 +2,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <title><?= SITE_NAME; ?> - <?= routeName(); ?></title>
-    
-    <meta property="og:title" content="Radio Generation" />
-    <meta property="og:description" content="The dance station!" />
-    <meta property="og:image" content="https://www.radiogeneration.it/assets/social-media-image.jpg" />
-    <meta property="og:url" content="https://www.radiogeneration.it" />
-    
+<?php if (!isset($excludeOGs)) { ?>
+    <meta property="og:title" content="<?= OG_TITLE; ?>" />
+    <meta property="og:description" content="<?= OG_DESC ?>" />
+    <meta property="og:image" content="<?= OG_IMAGE; ?>" />
+    <meta property="og:url" content="<?= SITE_URL; ?>" />
+<?php } ?>
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -91,7 +91,7 @@
     <link rel="preload" href="<?= SITE_URL; ?>/assets/icons/radio-loading-spinning.svg" as="image" />
     <link rel="preload" href="<?= SITE_URL; ?>/assets/pause-button.svg" as="image" />
     
-    <link rel="stylesheet" href="assets/djsannyj/all.css"/>
+    <link rel="stylesheet" href="<?= SITE_URL; ?>/assets/djsannyj/all.css"/>
 
     <style>
         .video-banner-viewer {
@@ -313,4 +313,6 @@
       }
     }
     </style>
+<?php if (!isset($noHeadClose)) { ?>
 </head>
+<?php } ?>
