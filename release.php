@@ -146,7 +146,7 @@ if (!empty($item['audio_url'])) {
                             <h2 class="subsection-headline">About</h2>
                             <?php if (!empty($video_file)) { ?>
                             <div class="video-media">
-                                <video class="video-viewer" src="https://www.radiogeneration.it/cdn/storage/file/ffa01132885017b2873a83abf5b6c410.mp4" controls="" autoplay="" width="640" height="360"></video>
+                                <video class="video-viewer" src="<?= $video_file; ?>" controls="" autoplay="" width="640" height="360"></video>
                             </div>
                             <?php } ?>
                             <?php if (!empty($youtube_url)) { ?>
