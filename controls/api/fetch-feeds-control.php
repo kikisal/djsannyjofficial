@@ -28,8 +28,8 @@ function null_default($val, $def) {
 
 $validFeedTypes = [
     "news",
-    "podcast",
-    "programs"
+    "discografy",
+    "radioshow"
 ];
 
 

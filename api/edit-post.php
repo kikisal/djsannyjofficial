@@ -86,11 +86,12 @@ function handleCreatePost() {
     $audioCoverUrl      = @$input['audioCoverUrl'];
     $audioTitle         = @$input['audioTitle'];
     $videoFileUrl       = @$input['videoFileUrl'];
+    $tracklistToken     = @$input['tracklistToken'] ?? '';
 
     if (empty($title))
         Utils\HTTPResponse::exitJsonExtended('invalid-data', 'server-error', 'Inserire un titolo più lungo');
 
-    if (!in_array($targetSection, ['news', 'podcast', 'programs']))
+    if (!in_array($targetSection, ['news', 'discografy', 'radioshow']))
         Utils\HTTPResponse::exitJsonExtended('invalid-data', 'server-error', 'La sezione di destinazione non esiste.');
 
     if (empty($imageCoverUrl))
@@ -99,10 +100,12 @@ function handleCreatePost() {
     $stmt = $conn->prepare('INSERT INTO `feeds` (
     `type`, `timestamp`, `image_url`, `audio_url`, `video_urls`, 
     `title`, `text_content`, `author`, `audio_title`, `audio_cover_url`,
-    `video_file_url`) VALUES (?, ?, ?, ?, ?, ?, ?, \'\', ?, ?, ?);');
+    `video_file_url`, `tracklist_token`, `post_year`) VALUES (?, ?, ?, ?, ?, ?, ?, \'\', ?, ?, ?, ?, ?);');
+
+    $post_year = intval(date("Y"));
 
     try {
-        $result = $stmt->execute([$targetSection, time(), $imageCoverUrl, $audioCoverUrl, $youtubeURL, $title, $textContent, $audioTitle, $playerCoverImage, $videoFileUrl]);
+        $result = $stmt->execute([$targetSection, time(), $imageCoverUrl, $audioCoverUrl, $youtubeURL, $title, $textContent, $audioTitle, $playerCoverImage, $videoFileUrl, $tracklistToken, $post_year]);
         $feedId = $conn->lastInsertId();
 
         if ($result) {
@@ -140,6 +143,7 @@ function handleEditPost() {
     $audioCoverUrl      = @$input['audioCoverUrl'];
     $audioTitle         = @$input['audioTitle'];
     $videoFileUrl       = @$input['videoFileUrl'];
+    $tracklistToken     = @$input['tracklistToken'] ?? '';
 
     
     if (!@isset($_GET['id']) || $feedId < 0)
@@ -148,26 +152,28 @@ function handleEditPost() {
     if (empty($title))
         Utils\HTTPResponse::exitJsonExtended('invalid-data', 'server-error', 'Inserire un titolo più lungo');
 
-    if (!in_array($targetSection, ['news', 'podcast', 'programs']))
+    if (!in_array($targetSection, ['news', 'discografy', 'radioshow']))
         Utils\HTTPResponse::exitJsonExtended('invalid-data', 'server-error', 'La sezione di destinazione non esiste.');
 
     if (empty($imageCoverUrl))
         Utils\HTTPResponse::exitJsonExtended('invalid-data', 'server-error', 'Inserire la copertina.');
     
     $stmt = $conn->prepare("UPDATE `feeds` SET 
-        `type` = ?,
-        `image_url` = ?, 
-        `audio_url` = ?, 
-        `video_urls` = ?, 
-        `title` = ?, 
-        `text_content` = ?,  
-        `audio_title` = ?, 
-        `audio_cover_url` = ?, 
-        `video_file_url` = ? WHERE `id` = ?"
+        `type`              = ?,
+        `image_url`         = ?, 
+        `audio_url`         = ?, 
+        `video_urls`        = ?, 
+        `title`             = ?, 
+        `text_content`      = ?,  
+        `audio_title`       = ?, 
+        `audio_cover_url`   = ?, 
+        `video_file_url`    = ?,
+        `tracklist_token`   = ? 
+        WHERE `id` = ?"
     );
 
     try {
-        $result = $stmt->execute([$targetSection, $imageCoverUrl, $audioCoverUrl, $youtubeURL, $title, $textContent, $audioTitle, $playerCoverImage, $videoFileUrl, $feedId]);
+        $result = $stmt->execute([$targetSection, $imageCoverUrl, $audioCoverUrl, $youtubeURL, $title, $textContent, $audioTitle, $playerCoverImage, $videoFileUrl, $tracklistToken, $feedId]);
 
         if ($result) {
             exit(json_encode([

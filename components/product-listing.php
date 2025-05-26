@@ -24,7 +24,7 @@ function fetch_feeds($page, $items_per_page, $type) {
     $conn        = $db->getConnection();
     $begin       = ($page - 1) * $items_per_page;
 
-    $feeds = $conn->prepare("SELECT * FROM `feeds` WHERE `type` = ? ORDER BY `timestamp` DESC LIMIT $begin, $items_per_page");
+    $feeds = $conn->prepare("SELECT * FROM `feeds` WHERE `type` = ? ORDER BY `post_year` DESC LIMIT $begin, $items_per_page");
     $feeds->bindParam(1, $type, PDO::PARAM_STR);
 
     if (!$feeds->execute())
@@ -83,7 +83,7 @@ if ($db->connect()) {
                             <div class="browse-title"><?= $page_item['title']; ?></div>
                             <div class="flex browse-category gap-2">
                                 <div class="fa-icon headphone fs-small fw-lighter"></div>
-                                <div class="fs-small fw-lighter"><?= date("Y", $page_item['timestamp']); ?></div>
+                                <div class="fs-small fw-lighter"><?= $page_item['post_year']; ?></div>
                             </div>
                             <div class="flew-grow"></div>
                         </div>

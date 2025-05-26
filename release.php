@@ -44,25 +44,44 @@ if (!$item) {
     exit;
 }
 
-$item_title    = $item['title'];
-$content_image = $item['image_url'];
-$video_file    = $item['video_file_url'];
-$youtube_url   = $item['video_urls'];
+$item_title     = $item['title'];
+$content_image  = $item['image_url'];
+$video_file     = $item['video_file_url'];
+$youtube_url    = $item['video_urls'];
 
-$content_desc  = $item['text_content'];
-$timestamp     = $item['timestamp'];
+$content_desc   = $item['text_content'];
+$timestamp      = $item['timestamp'];
+$post_year      = $item['post_year'];
+
+$tracklistToken = $item['tracklist_token'];
+
 $tracklists    = [];
 $mime          = getMimeFromUrlExtension($content_image);
 
-if (!empty($item['audio_url'])) {
-    $tracklists[] = [
-        "id"          => $item['id'],
-        "title"       => $item['title'],
-        "url"         => $item['audio_url'],
-        "audio_cover" => $item['audio_cover_url']
-    ];
-}
+// if (!empty($item['audio_url'])) {
+//     $tracklists[] = [
+//         "id"          => $item['id'],
+//         "title"       => $item['title'],
+//         "url"         => $item['audio_url'],
+//         "audio_cover" => $item['audio_cover_url']
+//     ];
+// }
 
+$tracklistRecords = $conn->prepare("SELECT * FROM `tracklist_editor` WHERE `token` = ?");
+$tracklistRecords->bindParam(1, $tracklistToken, PDO::PARAM_INT);
+
+if ($tracklistRecords->execute()) {
+    $tracklistRecords = $tracklistRecords->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($tracklistRecords as $track) {
+        $tracklists[] = [
+            "id"          => $track['id'],
+            "title"       => $track['title'],
+            "url"         => $track['audio_url'],
+            "duration"    => $track['duration'],
+            "audio_cover" => ""
+        ];
+    }
+}
 
 ?>
 
@@ -86,6 +105,26 @@ if (!empty($item['audio_url'])) {
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="<?= htmlentities($item_title); ?>" />
 <meta name="twitter:image" content="<?= $content_image; ?>" />
+<style>
+.custom-tb-info h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: unset;
+    text-align: left;
+}
+
+.custom-tb-info tr td:first-of-type {
+    padding-left: 20px;
+}
+
+.custom-tb-info a {
+    color: #6872cb;
+}
+
+.custom-tb-info a:hover {
+    text-decoration: underline;
+}
+</style>
 </head>
 
 <body opacity-animation class="state-disappear" use-img-animation>    
@@ -102,7 +141,6 @@ if (!empty($item['audio_url'])) {
             </div>
         </div>
         
-
         <div class="content-section product-browsing --lower-my-padding-top" style="padding: 60px 0;">
             <div class="fixed-content content-padded">
                 <div class="flex col-on-mobile" style="gap: 55px">
@@ -134,9 +172,11 @@ if (!empty($item['audio_url'])) {
                                 <div class="djsn-track-row">
                                     <div>#<?= $index + 1 ?></div>
                                     <div class="djsn-track-title"><?= $track['title'] ?></div>
-                                    <div id="<?= $durId ?>" class="djsn-track-duration">--:--</div>
+                                    <div id="<?= $durId ?>" class="djsn-track-duration"><?= $track['duration'] ?></div>
+                                    <?php if (!empty($track['url'])) { ?>
                                     <i id="<?= $btnId ?>" class="--fa-solid play djsn-play-button" data-audio="<?= $audioId; ?>"></i>
                                     <audio id="<?= $audioId ?>" src="<?= $track['url'] ?>"></audio>
+                                    <?php } ?>
                                 </div>
                                 <?php } ?>
                             </div>
@@ -161,10 +201,18 @@ if (!empty($item['audio_url'])) {
                                 <?= $content_desc; ?>
                             </div>
                             <div class="release-about-subsection">
+                                <?php
+                                if ($post_year) {
+                                ?>
                                 <div>
-                                    <span style="color: var(--primary-dark);">Rilasciata:</span>
-                                    <span style="color: #5a6370;"><?= date('m-d-Y', $timestamp); ?></span>
-                                </div>
+                                    <span style="color: var(--primary-dark);">Anno di rilascio:</span>
+                                    <span style="color: #5a6370;"><?= $post_year; ?></span>
+                                </div>  
+                                <?php } ?>
+                                <div>
+                                    <span style="color: var(--primary-dark);">Data del post:</span>
+                                    <span style="color: #5a6370;"><?= date('d-m-Y', $timestamp); ?></span>
+                                </div>                        
                             </div>
                         </div>
                     </div>    
@@ -188,6 +236,9 @@ if (!empty($item['audio_url'])) {
     buttons.forEach(button => {
         const audioId = button.dataset.audio;
         const audio = document.getElementById(audioId);
+        
+        if (!audio) return;
+
         const durElem = document.getElementById('dur_' + audioId.split('_')[1]);
 
         // Load duration

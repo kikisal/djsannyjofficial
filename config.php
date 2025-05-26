@@ -15,7 +15,7 @@ define('OPEN_FIREWALL_SERVICE_LINK', 'https://radiogenerationtv.radio12345.com/o
 define('RADIO_FETCH_LINK_API', SITE_URL . '/api/get_radio_link');
 define('OPEN_FIREWALL_LINK', SITE_URL . '/api/openfirewall');
 
-define('CDN_ENDPOINT', 'http://radiogeneration.test/cdn/storage/');
+define('CDN_ENDPOINT', 'http://djsannyjofficial.test/cdn/storage/');
 
 /* --- SOCIALS --- */
 define('FACEBOOK_LINK', 'https://www.facebook.com/santo.finocchiaro.djsannyj');
