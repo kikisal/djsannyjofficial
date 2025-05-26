@@ -49,6 +49,21 @@ $content_image  = $item['image_url'];
 $video_file     = $item['video_file_url'];
 $youtube_url    = $item['video_urls'];
 
+$audio_cover      = $item['audio_cover_url'];
+$audio_preview    = $item['audio_url'];
+
+$audio_key         = null;
+$audio_format      = null;
+
+$audio_preview_key = @explode('/', $audio_preview);
+$audio_preview_key = $audio_preview_key[count($audio_preview_key) - 1];
+$audio_preview_key = @explode('.', $audio_preview_key);
+$audio_key         = @$audio_preview_key[0];
+$audio_format      = @$audio_preview_key[1];
+
+
+$audio_title      = $item['audio_title'];
+
 $content_desc   = $item['text_content'];
 $timestamp      = $item['timestamp'];
 $post_year      = $item['post_year'];
@@ -125,6 +140,89 @@ if ($tracklistRecords->execute()) {
     text-decoration: underline;
 }
 </style>
+<style>
+.dw-audio-player {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    margin-top: 43px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+}
+
+.dw-audio-cover {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.dw-audio-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    flex: 1;
+}
+
+.dw-audio-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 11px;
+}
+
+.dw-audio-play-btn,
+.dw-audio-download-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.dw-audio-play-btn:hover,
+.dw-audio-download-btn:hover {
+    color: #007bff;
+}
+
+.dw-audio-timeline {
+    margin-top: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    outline: none;
+}
+
+.dw-audio-timeline::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+    margin-top: -3px;
+}
+</style>
+<style>
+table h2 {
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+table a {
+    color: #506dce;
+}
+
+table td {
+    padding: 0px 0 0 6px;
+}
+</style>
 </head>
 
 <body opacity-animation class="state-disappear" use-img-animation>    
@@ -182,6 +280,50 @@ if ($tracklistRecords->execute()) {
                             </div>
                         </div>
                         <?php } ?>
+                        <?php if (!empty($audio_preview)) { ?>
+                        <div class="release-desc-section">
+                            <h2 class="subsection-headline">Audio</h2>
+                            <div class="dw-audio-player">
+                            <img class="dw-audio-cover" src="<?= $audio_cover; ?>" alt="Cover" />
+                            <div class="dw-audio-controls">
+                                <div class="dw-audio-buttons">
+                                <i class="fa-solid fa-play dw-audio-play-btn"></i>
+                                <a class="dw-audio-download-btn" href="<?= CDN_ENDPOINT . 'download-audio?title='. urlencode($audio_title) .'&k=' . $audio_key . '.' . $audio_format; ?>" download>
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                                </div>
+                                <input type="range" class="dw-audio-timeline" value="0" />
+                            </div>
+                            <audio class="download-audio" src="<?= $audio_preview; ?>"></audio>
+                            </div>
+                            <script>
+                                (() => {
+                                    const audio     = document.querySelector("audio.download-audio");
+                                    const playBtn   = document.querySelector(".dw-audio-play-btn");
+                                    const timeline  = document.querySelector(".dw-audio-timeline");
+
+                                    playBtn.addEventListener("click", () => {
+                                        if (audio.paused) {
+                                            audio.play();
+                                            playBtn.classList.replace("fa-play", "fa-pause");
+                                        } else {
+                                            audio.pause();
+                                            playBtn.classList.replace("fa-pause", "fa-play");
+                                        }
+                                    });
+
+                                    audio.addEventListener("timeupdate", () => {
+                                        timeline.value = (audio.currentTime / audio.duration) * 100 || 0;
+                                    });
+
+                                    timeline.addEventListener("input", () => {
+                                        audio.currentTime = (timeline.value / 100) * audio.duration;
+                                    });
+                                })();
+                            </script>
+                        </div>
+
+                        <?php } ?>
                         <div class="release-desc-section">
                             <h2 class="subsection-headline">About</h2>
                             <?php if (!empty($video_file)) { ?>
@@ -215,7 +357,7 @@ if ($tracklistRecords->execute()) {
                                 </div>                        
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>
