@@ -57,7 +57,7 @@ if ($db->connect()) {
     <div class="rg-overlay" id="rg-sharePopup">
       <div class="rg-popup">
         <h2>Condividi il link</h2>
-        <input type="text" id="rg-shareUrl" readonly value="https://radiogeneration.it/live">
+        <input type="text" id="rg-shareUrl" readonly value="https://generationtv.it/live">
         <div class="rg-buttons">
           <button class="rg-copy" onclick="rgCopyUrl()">Copia</button>
           <button class="rg-close" onclick="rgClosePopup()">Chiudi</button>
